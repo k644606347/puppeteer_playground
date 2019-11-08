@@ -1,2 +1,1 @@
-# puppeteer_playground
-
+# puppeteer_demo
