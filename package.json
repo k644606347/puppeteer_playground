@@ -1,23 +1,19 @@
 {
-  "name": "puppeteer_demo",
+  "name": "pagecheck",
   "version": "1.0.0",
-  "description": "",
-  "main": "demo1.js",
+  "description": "check page error from url",
+  "main": "index.js",
   "scripts": {
-    "start": "node demo1.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/k644606347/puppeteer_demo.git"
-  },
-  "author": "",
+  "author": "nianwang",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/k644606347/puppeteer_demo/issues"
-  },
-  "homepage": "https://github.com/k644606347/puppeteer_demo#readme",
   "dependencies": {
-    "puppeteer": "^1.18.1"
+    "colors": "^1.4.0",
+    "express": "^4.17.1",
+    "puppeteer": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^1.20.2"
   }
 }
