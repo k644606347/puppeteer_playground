@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const express = require('express');
 const app = express();
 const puppeteer = require('puppeteer');
@@ -7,12 +8,11 @@ const colors = require('colors');
 const tools = require('./Tools');
 const { isDebugReq } = require('./Is');
 
+
+app.use('/public/',express.static(path.resolve(__dirname, '../public')));
 app.get('/', function (req, res) {
     let { query } = req,
         { url } = query;
-
-    // mock
-    // url = 'http://financec.sinda.cn/blog/master/index.d.html';
 
     /**
      * @field failed_assets
@@ -27,13 +27,11 @@ app.get('/', function (req, res) {
     console.clear();
     (async () => {
         let browserOptions = {
-            headless: false,
             // executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
-            devtools: true,
-            // ...isDebugReq(req) && {
-            //     executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
-            //     devtools: true,
-            // }
+            ...isDebugReq(req) && {
+                headless: false,
+                devtools: true,
+            }
         }
         const browser = await puppeteer.launch(browserOptions);
         const [page] = await browser.pages();
@@ -57,7 +55,7 @@ app.get('/', function (req, res) {
                 result.failed_assets.push({
                     url: resourceUrl,
                     resourceType: req.resourceType(),
-                    errorText,
+                    error: errorText,
                 });
             });
 

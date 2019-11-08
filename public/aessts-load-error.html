@@ -1,0 +1,12 @@
+<script src="./unkown.js"></script>
+<link href="./unkown.css" media="screen" />
+<script>
+    throw new Error('js process error');
+</script>
+<script>
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new Error('JS Promise Error'));
+        }, 5000);
+    })
+</script>
