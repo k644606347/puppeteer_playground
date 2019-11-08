@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer');
 const colors = require('colors');
 const tools = require('./Tools');
 const { isDebugReq } = require('./Is');
-
+const env = require('../config/env');
 
 app.use('/public/',express.static(path.resolve(__dirname, '../public')));
 app.get('/', function (req, res) {
@@ -15,16 +15,21 @@ app.get('/', function (req, res) {
         { url } = query;
 
     /**
-     * @field failed_assets
+     * @field failed-assets
+     *      @field url
+     *      @field resourceType
+     *      @field error
+     *      @field http-code
+     * 
      * @field http-code
      * @field content-type
      * @field page-error
      */
     let result = {
-        failed_assets: []
+        'failed-assets': []
     };
 
-    console.clear();
+    // console.clear();
     (async () => {
         let browserOptions = {
             // executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
@@ -44,6 +49,8 @@ app.get('/', function (req, res) {
             })
             .on('requestfailed', function(req) {// 资源加载失败的情况下触发（js、css、image等）
                 let resourceUrl = req.url(),
+                    res = req.response(),
+                    httpCode = res ? res.status() : '',
                     failureObj = req.failure(),
                     errorText = failureObj && failureObj.errorText || '';
 
@@ -52,10 +59,11 @@ app.get('/', function (req, res) {
                         errorText = 'https页面引入http资源';
                     }
                 }
-                result.failed_assets.push({
+                result['failed-assets'].push({
                     url: resourceUrl,
-                    resourceType: req.resourceType(),
+                    'resource-type': req.resourceType(),
                     error: errorText,
+                    'http-code': httpCode,
                 });
             });
 
@@ -85,13 +93,15 @@ app.get('/', function (req, res) {
                 result['page-error'] = tools.formatError(err);
             })
             .then(() => {
+                setTimeout(() => {
                     res.json(result);
                     // page.close();
                     browser.close();
+                }, 3000);
             });
     })();
 });
 
-app.listen(3000, function () {
+app.listen(env.port, env.ip, function () {
     console.log('Example app listening on port 3000!');
 });

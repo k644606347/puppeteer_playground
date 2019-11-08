@@ -1,13 +1,15 @@
 const path = require('path');
 const openBrowser = require('react-dev-utils/openBrowser');
+const env = require('./env');
 
 require('../src/index');
 
+let origin = `http://${env.ip}:${env.port}`;
 setTimeout(() => {
     [
-        'http://localhost:3000/?url=https://finance.sina.cn/blog/master/index.d.html',
-        'http://localhost:3000/?url=http://localhost:3000/public/aessts-load-error.html',
-        'http://localhost:3000/?url=http://localhost:3000/public/unknown.html'
+        `${origin}/?url=https://finance.sina.cn/blog/master/index.d.html`,
+        `${origin}/?url=${origin}/public/aessts-load-error.html`,
+        `${origin}/?url=${origin}/public/404.html`,
     ].forEach(url => {
         openBrowser(url);
     });
