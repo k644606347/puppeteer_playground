@@ -79,9 +79,9 @@ app.get('/', function (req, res) {
                     .then(val => {
                         try {
                             JSON.parse(val);
-                            result['content-type'] = 'html/json';
+                            result['content-type'] = 'json';
                         } catch(err) {
-                            result['content-type'] = 'html/text';
+                            result['content-type'] = 'html';
                         }
                         result['content-length'] = val.length;
                     })

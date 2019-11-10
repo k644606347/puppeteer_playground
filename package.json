@@ -4,7 +4,8 @@
   "description": "check page error from url",
   "main": "index.js",
   "scripts": {
-    "start": "node ./config/start.js"
+    "start": "node ./config/start.js",
+    "test": "node config/test.js"
   },
   "author": "nianwang",
   "license": "ISC",
