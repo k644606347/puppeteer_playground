@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
             .on('requestfailed', function(req) {// 资源加载失败的情况下触发（js、css、image等）
                 let resourceUrl = req.url(),
                     res = req.response(),
-                    httpCode = res ? res.status() : '',
+                    httpCode = res ? res.status() : null,
                     failureObj = req.failure(),
                     errorText = failureObj && failureObj.errorText || '';
 
@@ -68,7 +68,7 @@ app.get('/', function (req, res) {
             });
 
         page.goto(url, {
-            timeout: 3000,
+            timeout: 30000,
             waitUntil: [
                 'networkidle0'
             ]
@@ -89,15 +89,13 @@ app.get('/', function (req, res) {
                         result['page-error'] = tools.formatError(err);
                     })
             }, (err) => {// 页面级加载失败
-                result['http-code'] = ''; // catch中没有获取http code的方法
+                result['http-code'] = null; // catch中没有获取http code的方法
                 result['page-error'] = tools.formatError(err);
             })
             .then(() => {
-                setTimeout(() => {
-                    res.json(result);
-                    // page.close();
-                    browser.close();
-                }, 3000);
+                res.json(result);
+                // page.close();
+                browser.close();
             });
     })();
 });
