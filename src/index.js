@@ -101,5 +101,5 @@ app.get('/', function (req, res) {
 });
 
 app.listen(env.port, env.ip, function () {
-    console.log('Example app listening on port 3000!');
+    console.log(`Example app listening on port ! ${env.port}`);
 });
