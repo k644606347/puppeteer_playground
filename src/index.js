@@ -70,7 +70,7 @@ app.get('/', function (req, res) {
         page.goto(url, {
             timeout: 30000,
             waitUntil: [
-                'networkidle0'
+                'networkidle0' // 不再有网络连接时触发（至少500毫秒后）
             ]
         })
             .then(res => {
