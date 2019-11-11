@@ -23,6 +23,7 @@ app.get('/', function (req, res) {
      * 
      * @field http-code
      * @field content-type
+     * @field content-length
      * @field page-error
      */
     let result = {
