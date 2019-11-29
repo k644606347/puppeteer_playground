@@ -8,7 +8,7 @@ class Tools {
         let { beautifyJSON } = options;
         
         if (isError(err)) {
-            return err + '';
+            return err.stack + '';
         } else {
             return JSON.stringify(err, null, beautifyJSON ? 4 : '');
         }
