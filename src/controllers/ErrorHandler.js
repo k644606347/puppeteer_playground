@@ -6,7 +6,7 @@ let ErrorHandler = makeController({
             console.error(err.stack);
             next(err);
         },
-        method: 'all1',
+        method: 'all',
     },
     clientErrorHandler(err, req, res, next) {
         if (req.xhr) {
