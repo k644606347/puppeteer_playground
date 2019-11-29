@@ -38,7 +38,7 @@ app.get('/check', function (req, res) {
     async function process() {
         let browserOptions = {
             // executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
-            // args: ['--no-sandbox'],
+            // args: ['--no-sandbox'], // NOTE: root下不能运行在沙箱模式，必须开启此选项
             ...isDebugReq(req) && {
                 headless: false,
                 devtools: true,
