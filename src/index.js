@@ -2,6 +2,8 @@
 
 const path = require('path');
 const express = require('express');
+require('express-async-errors');
+
 const app = express();
 const puppeteer = require('puppeteer');
 const colors = require('colors');
@@ -103,12 +105,13 @@ app.get('/check', function (req, res) {
             });
     };
 
-    process().catch((err) => {
-        res.json({
-            status: 1,
-            msg: tools.formatError(err),
-        });
-    })
+    process()
+    // .catch((err) => {
+    //     res.json({
+    //         status: 1,
+    //         msg: tools.formatError(err),
+    //     });
+    // })
 });
 
 app.all('/test', (req, res) => {
