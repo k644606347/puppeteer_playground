@@ -8,6 +8,7 @@ const colors = require('colors');
 const tools = require('./Tools');
 const { isDebugReq } = require('./Is');
 const env = require('../config/env');
+const envInfo = env.get();
 
 app.use('/public/',express.static(path.resolve(__dirname, '../public')));
 app.get('/', function (req, res) {
@@ -101,6 +102,6 @@ app.get('/', function (req, res) {
     })();
 });
 
-app.listen(env.port, env.ip, function () {
-    console.log(`Example app listening on port ! ${env.port}`);
+app.listen(envInfo.port, envInfo.ip, function () {
+    console.log(`Example app listening on port ! ${envInfo.port}`);
 });
