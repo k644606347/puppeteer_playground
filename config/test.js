@@ -7,9 +7,9 @@ require('../src/index');
 let origin = `http://${env.dev.ip}:${env.dev.port}`;
 setTimeout(() => {
     [
-        `${origin}/?url=https://finance.sina.cn/blog/master/index.d.html`,
-        `${origin}/?url=${origin}/public/aessts-load-error.html`,
-        `${origin}/?url=${origin}/public/404.html`,
+        `${origin}/check?url=https://finance.sina.cn/blog/master/index.d.html`,
+        `${origin}/check?url=${origin}/public/aessts-load-error.html`,
+        `${origin}/check?url=${origin}/public/404.html`,
     ].forEach(url => {
         openBrowser(url);
     });

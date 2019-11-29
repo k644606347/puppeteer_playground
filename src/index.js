@@ -11,7 +11,7 @@ const env = require('../config/env');
 const envInfo = env.get();
 
 app.use('/public/',express.static(path.resolve(__dirname, '../public')));
-app.get('/', function (req, res) {
+app.get('/check', function (req, res) {
     let { query } = req,
         { url } = query;
 
@@ -101,6 +101,13 @@ app.get('/', function (req, res) {
             });
     })();
 });
+
+app.all('/test', (req, res) => {
+    res.json({
+        query: req.query,
+        httpCode: res.statusCode,
+    })
+})
 
 app.listen(envInfo.port, envInfo.ip, function () {
     console.log(`Example app listening on port ! ${envInfo.port}`);
