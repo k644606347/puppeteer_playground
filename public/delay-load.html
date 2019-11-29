@@ -1,0 +1,20 @@
+<script src="./404.js" defer></script>
+<script src="./404.js" defer></script>
+<script>
+    setTimeout(() => {
+        let script = document.createElement('script');
+        script.setAttribute('src', 'dynamic-create-script.js');
+        script.addEventListener('load', () => {
+            setTimeout(() => {
+                let script = document.createElement('script');
+                script.setAttribute('src', 'dynamic-create-script2.js');
+                script.addEventListener('onload', () => {
+                    
+                })
+                document.body.appendChild(script);
+            }, 200);
+        })
+        document.body.appendChild(script);
+    }, 200);
+</script>
+<!-- <link href="./404.css" media="screen" /> -->
