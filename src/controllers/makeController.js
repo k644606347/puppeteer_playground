@@ -12,7 +12,7 @@ function makeController(actions = {}, options = {}) {
                 throw new Error(`actionFn必须是一个函数，当前是${actionFn}，，请确认key为${k}的action配置！`);
             }
             if (!isFunction(app[httpMethod])) {
-                throw new Error(`"${k}"在Express中没有适配的函数，请确认key为"${k}"的action配置！`);
+                throw new Error(`"${httpMethod}"在Express中没有适配的函数，请确认key为"${k}"的action配置！`);
             }
 
             app[httpMethod](actionFn);
