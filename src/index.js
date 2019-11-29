@@ -106,12 +106,14 @@ app.get('/check', function (req, res) {
     };
 
     process()
-    // .catch((err) => {
-    //     res.json({
-    //         status: 1,
-    //         msg: tools.formatError(err),
-    //     });
-    // })
+        .catch((err) => {
+            let msg = tools.formatError(err);
+            console.error(msg);
+            res.json({
+                status: 1,
+                msg,
+            });
+        });
 });
 
 app.all('/test', (req, res) => {
