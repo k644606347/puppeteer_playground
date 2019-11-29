@@ -9,6 +9,7 @@ const tools = require('./Tools');
 const { isDebugReq } = require('./Is');
 const env = require('../config/env');
 const envInfo = env.get();
+const { ErrorHandler } = require('./controllers/ErrorHandler');
 
 app.use('/public/',express.static(path.resolve(__dirname, '../public')));
 app.get('/check', function (req, res) {
@@ -35,7 +36,7 @@ app.get('/check', function (req, res) {
     (async () => {
         let browserOptions = {
             // executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
-            args: ['--no-sandbox'/* , '--disable-setuid-sandbox' */],
+            args: ['--no-sandbox'],
             ...isDebugReq(req) && {
                 headless: false,
                 devtools: true,
@@ -108,7 +109,9 @@ app.all('/test', (req, res) => {
         query: req.query,
         httpCode: res.statusCode,
     })
-})
+});
+
+ErrorHandler(app);
 
 app.listen(envInfo.port, envInfo.ip, function () {
     console.log(`Example app listening on port ! ${envInfo.port}`);

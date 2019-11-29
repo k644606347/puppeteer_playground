@@ -38,4 +38,6 @@ function isDebugReq(req) {
 module.exports = {
     isError,
     isDebugReq,
+    isFunction,
+    isPlainObject,
 }
