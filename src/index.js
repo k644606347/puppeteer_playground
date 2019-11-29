@@ -33,7 +33,7 @@ app.get('/check', function (req, res) {
     };
 
     // console.clear();
-    (async () => {
+    async function process() {
         let browserOptions = {
             // executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
             // args: ['--no-sandbox'],
@@ -101,7 +101,14 @@ app.get('/check', function (req, res) {
                 // page.close();
                 browser.close();
             });
-    })();
+    };
+
+    process().catch((err) => {
+        res.json({
+            status: 1,
+            msg: tools.formatError(err),
+        });
+    })
 });
 
 app.all('/test', (req, res) => {
