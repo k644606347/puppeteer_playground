@@ -35,6 +35,7 @@ app.get('/check', function (req, res) {
     (async () => {
         let browserOptions = {
             // executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
+            args: ['--no-sandbox'/* , '--disable-setuid-sandbox' */],
             ...isDebugReq(req) && {
                 headless: false,
                 devtools: true,

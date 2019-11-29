@@ -18,6 +18,7 @@ function get() {
 }
 console.log('process.env.NODE_ENV = ', process.env.NODE_ENV);
 module.exports = {
+    isProd,
     dev,
     prod,
     get,
