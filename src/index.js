@@ -95,6 +95,7 @@ app.get('/check', function (req, res) {
                         result['page-error'] = tools.formatError(err);
                     })
             }, (err) => {// 页面级加载失败
+                console.log(err);
                 result['http-code'] = null; // catch中没有获取http code的方法
                 result['page-error'] = tools.formatError(err);
             })
@@ -105,15 +106,16 @@ app.get('/check', function (req, res) {
             });
     };
 
-    process()
-        .catch((err) => {
-            let msg = tools.formatError(err);
-            console.error(msg);
-            res.json({
-                status: 1,
-                msg,
-            });
-        });
+    process();
+
+        // .catch((err) => {
+        //     let msg = tools.formatError(err);
+        //     console.error(msg);
+        //     res.json({
+        //         status: 1,
+        //         msg,
+        //     });
+        // });
 });
 
 app.all('/test', (req, res) => {
